@@ -8,11 +8,12 @@ export interface IBuildProps {
 
 export default class Build extends React.Component<IBuildProps, any> {
   private progressValue: number = Math.random() * 100;
+  private buildStatus: string = Math.random() > 0.5 ? 'success' : 'danger';
 
   public render() {
     return (
       <div className="card-holder">
-        <Card body={true} inverse={true} color="success">
+        <Card body={true} inverse={true} color={this.buildStatus}>
           <CardTitle>{this.props.buildName}</CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
