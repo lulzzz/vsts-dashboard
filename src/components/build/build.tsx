@@ -4,11 +4,13 @@ import './build.css';
 
 export interface IBuildProps {
   buildName: string;
+  buildNumber: string;
+  status: boolean;
 }
 
 export default class Build extends React.Component<IBuildProps, any> {
-  private progressValue: number = Math.random() * 100;
-  private buildStatus: string = Math.random() > 0.5 ? 'success' : 'danger';
+  private progressValue: number = 0;
+  private buildStatus: string = this.props.status ? 'success' : 'danger';
 
   public render() {
     return (
@@ -17,7 +19,7 @@ export default class Build extends React.Component<IBuildProps, any> {
           <CardTitle>{this.props.buildName}</CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
-            <CardSubtitle className="subtitle">#1 - 2 hours ago</CardSubtitle>
+            <CardSubtitle className="subtitle">#{this.props.buildNumber} - 2 hours ago</CardSubtitle>
           </div>
         </Card>
       </div>
@@ -28,7 +30,7 @@ export default class Build extends React.Component<IBuildProps, any> {
     if (this.progressValue > 0) {
       return <Progress className="progress" value={this.progressValue} color="info" />;
     } else {
-      return <div className="progress" />;
+      return <Progress className="progress" value="100" color="success" />;
     }
   }
 }
