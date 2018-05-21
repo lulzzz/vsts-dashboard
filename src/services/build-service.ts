@@ -8,7 +8,7 @@ export default class BuildService {
   public async getBuilds(): Promise<BuildData[]> {
     const vsts: vm.WebApi = await this.getApi();
     const vstsBuild: ba.IBuildApi = await vsts.getBuildApi();
-    const project = this.getEnv('API_PROJECT');
+    const project = process.env.API_PROJECT;
     const buildInfo: bi.Build[] = await vstsBuild.getBuilds(
       project,
       undefined, // definitions: number[]
@@ -39,8 +39,8 @@ export default class BuildService {
   private async getApi(): Promise<vm.WebApi> {
     return new Promise<vm.WebApi>(async (resolve, reject) => {
       try {
-        const serverUrl = this.getEnv('API_URL');
-        const token = this.getEnv('API_TOKEN');
+        const serverUrl = process.env.API_URL;
+        const token = process.env.API_TOKEN;
         const authHandler = vm.getPersonalAccessTokenHandler(token);
         const option = undefined;
 
@@ -52,9 +52,5 @@ export default class BuildService {
         reject(err);
       }
     });
-  }
-
-  private getEnv(name: string): string {
-    return process.env[name] as string;
   }
 }
