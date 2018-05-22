@@ -1,4 +1,6 @@
-# Dashboard
+# VSTS Dashboard
+
+[![CircleCI](https://circleci.com/gh/emisgroup/vsts-dashboard.svg?style=svg)](https://circleci.com/gh/emisgroup/vsts-dashboard)
 
 A dashboard to show the status of VSTS builds
 
