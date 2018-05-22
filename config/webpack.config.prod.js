@@ -240,7 +240,7 @@ module.exports = {
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
     new InterpolateHtmlPlugin(env.raw),
-    new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL', 'API_TOKEN', 'API_PROJECT']),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'VSTS_URL', 'VSTS_TOKEN', 'VSTS_PROJECT']),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,

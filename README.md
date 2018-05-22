@@ -12,13 +12,13 @@ Set environment variables using set or export:
 
 ```bash
 // use your URL
-API_URL=https://fabrikam.visualstudio.com/defaultcollection
+VSTS_URL=https://fabrikam.visualstudio.com/defaultcollection
 
 // use your token
-API_TOKEN={TOKEN}
+VSTS_TOKEN={TOKEN}
 
 // use your project
-API_PROJECT=myProject
+VSTS_PROJECT=myProject
 ```
 
 Run:
