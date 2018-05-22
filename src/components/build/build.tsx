@@ -30,7 +30,7 @@ export default class Build extends React.Component<IBuildProps, any> {
     if (this.progressValue > 0) {
       return <Progress className="progress" value={this.progressValue} color="info" />;
     } else {
-      return <Progress className="progress" value="100" color="success" />;
+      return <Progress className="progress" value="100" color={this.buildStatus} />;
     }
   }
 }
