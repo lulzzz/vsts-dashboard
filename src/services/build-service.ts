@@ -6,33 +6,34 @@ import BuildData from './build-data';
 
 export default class BuildService {
   public async getBuilds(): Promise<BuildData[]> {
+    const builds: BuildData[] = [];
     const vsts: vm.WebApi = await this.getApi();
     const vstsBuild: ba.IBuildApi = await vsts.getBuildApi();
     const project = process.env.API_PROJECT;
-    const buildInfo: bi.Build[] = await vstsBuild.getBuilds(
-      project,
-      undefined, // definitions: number[]
-      undefined, // queues: number[]
-      undefined, // buildNumber
-      undefined,
-      undefined, // maxFinishTime
-      undefined, // requestedFor: string
-      bi.BuildReason.All, // reason
-      bi.BuildStatus.Completed,
-      bi.BuildResult.Succeeded,
-      undefined, // tagFilters: string[]
-      undefined, // properties: string[]
-      10 // top: number
-    );
-    const builds: BuildData[] = [];
-    buildInfo.forEach(b => {
+    const defs: bi.BuildDefinitionReference[] = await vstsBuild.getDefinitions(project);
+    for (const d of defs) {
+      const build: bi.Build[] = await vstsBuild.getBuilds(
+        project,
+        [d.id],
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        1
+      );
       builds.push({
-        BuildNumber: b.buildNumber,
-        Name: b.definition.name,
-        Status: b.result === 2,
-        User: b.requestedFor.displayName
+        BuildNumber: build[0].buildNumber,
+        Name: build[0].definition.name,
+        Status: build[0].result === 2,
+        User: build[0].requestedFor.displayName
       });
-    });
+    }
     return builds;
   }
 
