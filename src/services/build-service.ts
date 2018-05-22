@@ -37,6 +37,7 @@ export default class BuildService {
       });
     }
     return builds;
+    return builds.sort((a, b) => (a.Name <= b.Name ? -1 : 1));
   }
 
   private async getApi(): Promise<vm.WebApi> {
