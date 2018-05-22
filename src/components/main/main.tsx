@@ -11,10 +11,12 @@ export default class Main extends React.Component<any, IBuildState> {
   }
 
   public render() {
-    const builds = this.state ? this.state.Builds.map(b => <Build key={b.Name + b.BuildNumber} buildName={b.Name} buildNumber={b.BuildNumber} status={b.Status} />) : [];
+    const builds = this.state
+      ? this.state.Builds.map(b => <Build key={b.Name + b.BuildNumber} buildName={b.Name} buildNumber={b.BuildNumber} status={b.Status} time={b.EndTime} />)
+      : [];
     const halfLength = Math.ceil(builds.length / 2);
     return (
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Col md="6">{builds.splice(0, halfLength)}</Col>
           <Col md="6">{builds}</Col>

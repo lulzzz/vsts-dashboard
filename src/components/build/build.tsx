@@ -6,6 +6,7 @@ export interface IBuildProps {
   buildName: string;
   buildNumber: string;
   status: boolean;
+  time: Date;
 }
 
 export default class Build extends React.Component<IBuildProps, any> {
@@ -19,7 +20,9 @@ export default class Build extends React.Component<IBuildProps, any> {
           <CardTitle>{this.props.buildName}</CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
-            <CardSubtitle className="subtitle">#{this.props.buildNumber} - 2 hours ago</CardSubtitle>
+            <CardSubtitle className="subtitle">
+              #{this.props.buildNumber} - {this.props.time.toLocaleString()}
+            </CardSubtitle>
           </div>
         </Card>
       </div>

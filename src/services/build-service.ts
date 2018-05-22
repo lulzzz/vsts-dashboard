@@ -29,7 +29,9 @@ export default class BuildService {
       );
       builds.push({
         BuildNumber: build[0].buildNumber,
+        EndTime: build[0].finishTime,
         Name: build[0].definition.name,
+        StartTime: build[0].startTime,
         Status: build[0].result === 2,
         User: build[0].requestedFor.displayName
       });

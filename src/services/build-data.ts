@@ -3,4 +3,6 @@ export default class BuildData {
   public Status: boolean;
   public User: string;
   public BuildNumber: string;
+  public StartTime: Date;
+  public EndTime: Date;
 }
