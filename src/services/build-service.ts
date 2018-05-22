@@ -9,7 +9,7 @@ export default class BuildService {
     const builds: BuildData[] = [];
     const vsts: vm.WebApi = await this.getApi();
     const vstsBuild: ba.IBuildApi = await vsts.getBuildApi();
-    const project = process.env.API_PROJECT;
+    const project = process.env.VSTS_PROJECT;
     const defs: bi.BuildDefinitionReference[] = await vstsBuild.getDefinitions(project);
     for (const d of defs) {
       const build: bi.Build[] = await vstsBuild.getBuilds(
@@ -42,8 +42,8 @@ export default class BuildService {
   private async getApi(): Promise<vm.WebApi> {
     return new Promise<vm.WebApi>(async (resolve, reject) => {
       try {
-        const serverUrl = process.env.API_URL;
-        const token = process.env.API_TOKEN;
+        const serverUrl = process.env.VSTS_URL;
+        const token = process.env.VSTS_TOKEN;
         const authHandler = vm.getPersonalAccessTokenHandler(token);
         const option = undefined;
 

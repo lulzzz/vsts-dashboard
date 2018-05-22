@@ -1,4 +1,6 @@
-# Dashboard
+# VSTS Dashboard
+
+[![CircleCI](https://circleci.com/gh/emisgroup/vsts-dashboard.svg?style=svg)](https://circleci.com/gh/emisgroup/vsts-dashboard)
 
 A dashboard to show the status of VSTS builds
 
@@ -12,13 +14,13 @@ Set environment variables using set or export:
 
 ```bash
 // use your URL
-API_URL=https://fabrikam.visualstudio.com/defaultcollection
+VSTS_URL=https://fabrikam.visualstudio.com/defaultcollection
 
 // use your token
-API_TOKEN={TOKEN}
+VSTS_TOKEN={TOKEN}
 
 // use your project
-API_PROJECT=myProject
+VSTS_PROJECT=myProject
 ```
 
 Run:

@@ -215,7 +215,7 @@ module.exports = {
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
     new InterpolateHtmlPlugin(env.raw),
-    new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL', 'API_TOKEN', 'API_PROJECT']),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'VSTS_URL', 'VSTS_TOKEN', 'VSTS_PROJECT']),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
