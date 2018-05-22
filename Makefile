@@ -33,7 +33,7 @@ build:
 
 .PHONY: test
 test:
-	npm test
+	CI=true npm test
 
 .PHONY: test-cov
 test-cov:
