@@ -21,7 +21,7 @@ export default class Build extends React.Component<IBuildProps, any> {
           {this.showProgressBar()}
           <div className="info-bar">
             <CardSubtitle className="subtitle">
-              #{this.props.buildNumber} - {this.props.time.toLocaleString()}
+              #{this.props.buildNumber} - {this.props.time ? this.props.time.toLocaleString() : 'Unknown'}
             </CardSubtitle>
           </div>
         </Card>

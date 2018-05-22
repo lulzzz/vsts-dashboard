@@ -36,7 +36,6 @@ export default class BuildService {
         User: build[0].requestedFor.displayName
       });
     }
-    return builds;
     return builds.sort((a, b) => (a.Name <= b.Name ? -1 : 1));
   }
 
