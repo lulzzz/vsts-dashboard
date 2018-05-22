@@ -16,8 +16,8 @@ export default class Main extends React.Component<any, IBuildState> {
     return (
       <Container>
         <Row>
-          <Col xs="6">{builds.splice(0, halfLength)}</Col>
-          <Col xs="6">{builds}</Col>
+          <Col md="6">{builds.splice(0, halfLength)}</Col>
+          <Col md="6">{builds}</Col>
         </Row>
       </Container>
     );
