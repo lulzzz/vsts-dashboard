@@ -27,6 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: make install
+      - run: make vet
 
       - save_cache:
           paths:

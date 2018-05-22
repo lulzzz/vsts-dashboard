@@ -26,6 +26,7 @@ install:
 
 .PHONY: vet
 vet:
+	./node_modules/tslint/bin/tslint  --project .
 
 .PHONY: build
 build:
