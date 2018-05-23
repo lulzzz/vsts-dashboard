@@ -1,8 +1,40 @@
+/**
+ * Represents the build data from VSTS
+ */
 export default class BuildData {
-  public Name: string;
-  public Status: boolean;
-  public User: string;
-  public BuildNumber: string;
-  public StartTime: Date;
-  public EndTime: Date;
+
+  /**
+   * The build number
+   */
+  public buildNumber: string;
+
+  /**
+   * The time the build finished
+   */
+  public endTime: Date;
+
+  /**
+   * The name of the build
+   */
+  public name: string;
+
+  /**
+   * The result of the build
+   */
+  public result: number;
+
+  /**
+   * The time the build was kicked off
+   */
+  public startTime: Date;
+
+  /**
+   * The status of the build
+   */
+  public status: number;
+
+  /**
+   * The user who kicked the build off
+   */
+  public user: string;
 }

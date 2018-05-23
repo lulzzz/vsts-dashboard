@@ -28,15 +28,16 @@ export default class BuildService {
         1
       );
       builds.push({
-        BuildNumber: build[0].buildNumber,
-        EndTime: build[0].finishTime,
-        Name: build[0].definition.name,
-        StartTime: build[0].startTime,
-        Status: build[0].result === 2,
-        User: build[0].requestedFor.displayName
+        buildNumber: build[0].buildNumber,
+        endTime: build[0].finishTime,
+        name: build[0].definition.name,
+        result: build[0].result,
+        startTime: build[0].startTime,
+        status: build[0].status,
+        user: build[0].requestedFor.displayName
       });
     }
-    return builds.sort((a, b) => (a.Name.toUpperCase() <= b.Name.toUpperCase() ? -1 : 1));
+    return builds.sort((a, b) => (a.name.toUpperCase() <= b.name.toUpperCase() ? -1 : 1));
   }
 
   private async getApi(): Promise<vm.WebApi> {
