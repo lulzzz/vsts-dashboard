@@ -19,7 +19,7 @@ export default class Main extends React.Component<IMainProps, IMainState> {
     const numCols = this.props.NumberOfColumns;
     const builds =
       this.state && this.state.Builds
-        ? this.state.Builds.map(b => <Build key={b.Name + b.BuildNumber} buildName={b.Name} buildNumber={b.BuildNumber} status={b.Status} time={b.EndTime} />)
+        ? this.state.Builds.map(b => <Build key={b.name + b.buildNumber} buildName={b.name} buildNumber={b.buildNumber} result={b.result} status={b.status} time={b.endTime} />)
         : [];
 
     const cols = [];
