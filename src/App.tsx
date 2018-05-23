@@ -10,7 +10,7 @@ class App extends React.Component {
         <div className="header">
           <Header />
         </div>
-        <Main />
+        <Main NumberOfColumns={2} />
       </div>
     );
   }

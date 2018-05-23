@@ -3,10 +3,11 @@ import * as Spinner from 'react-spinkit';
 import { Col, Container, Row } from 'reactstrap';
 import BuildService from '../../services/build-service';
 import Build from '../build/build';
-import IBuildState from '../build/build-state';
+import IMainProps from './main-props';
+import IMainState from './main-state';
 import './main.css';
 
-export default class Main extends React.Component<any, IBuildState> {
+export default class Main extends React.Component<IMainProps, IMainState> {
   public componentWillMount() {
     this.setState({ Loading: true });
     new BuildService().getBuilds().then(builds => {
@@ -15,10 +16,21 @@ export default class Main extends React.Component<any, IBuildState> {
   }
 
   public render() {
+    const numCols = this.props.NumberOfColumns;
     const builds =
       this.state && this.state.Builds
         ? this.state.Builds.map(b => <Build key={b.Name + b.BuildNumber} buildName={b.Name} buildNumber={b.BuildNumber} status={b.Status} time={b.EndTime} />)
         : [];
+
+    const cols = [];
+    for (let j = 0; j < numCols; j++) {
+      cols.push(
+        <Col key={j} lg={12 / numCols}>
+          {builds.filter((v, i) => i % numCols === j)}
+        </Col>
+      );
+    }
+
     if (this.state.Loading) {
       return (
         <div className="loader">
@@ -28,10 +40,7 @@ export default class Main extends React.Component<any, IBuildState> {
     } else {
       return (
         <Container fluid={true}>
-          <Row>
-            <Col md="6">{builds.filter((v, i) => i % 2 === 0)}</Col>
-            <Col md="6">{builds.filter((v, i) => i % 2 === 1)}</Col>
-          </Row>
+          <Row>{cols}</Row>
         </Container>
       );
     }
