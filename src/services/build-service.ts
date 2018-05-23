@@ -36,7 +36,7 @@ export default class BuildService {
         User: build[0].requestedFor.displayName
       });
     }
-    return builds.sort((a, b) => (a.Name <= b.Name ? -1 : 1));
+    return builds.sort((a, b) => (a.Name.toUpperCase() <= b.Name.toUpperCase() ? -1 : 1));
   }
 
   private async getApi(): Promise<vm.WebApi> {

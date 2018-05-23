@@ -19,7 +19,6 @@ export default class Main extends React.Component<any, IBuildState> {
       this.state && this.state.Builds
         ? this.state.Builds.map(b => <Build key={b.Name + b.BuildNumber} buildName={b.Name} buildNumber={b.BuildNumber} status={b.Status} time={b.EndTime} />)
         : [];
-    const halfLength = Math.ceil(builds.length / 2);
     if (this.state.Loading) {
       return (
         <div className="loader">
@@ -30,8 +29,8 @@ export default class Main extends React.Component<any, IBuildState> {
       return (
         <Container fluid={true}>
           <Row>
-            <Col md="6">{builds.splice(0, halfLength)}</Col>
-            <Col md="6">{builds}</Col>
+            <Col md="6">{builds.filter((v, i) => i % 2 === 0)}</Col>
+            <Col md="6">{builds.filter((v, i) => i % 2 === 1)}</Col>
           </Row>
         </Container>
       );
