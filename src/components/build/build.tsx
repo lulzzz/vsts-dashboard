@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import * as React from 'react';
 import { Card, CardSubtitle, CardTitle, Progress } from 'reactstrap';
 import './build.css';
@@ -16,12 +17,12 @@ export default class Build extends React.Component<IBuildProps, any> {
   public render() {
     return (
       <div className="card-holder">
-        <Card body={true} inverse={true} color={this.buildStatus}>
+        <Card className="shadow" body={true} inverse={true} color={this.buildStatus}>
           <CardTitle>{this.props.buildName}</CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
             <CardSubtitle className="subtitle">
-              #{this.props.buildNumber} - {this.props.time ? this.props.time.toLocaleString() : 'Unknown'}
+              #{this.props.buildNumber} - {this.props.time ? moment(this.props.time).fromNow() : 'Running'}
             </CardSubtitle>
           </div>
         </Card>
