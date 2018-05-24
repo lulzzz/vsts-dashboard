@@ -34,6 +34,7 @@ export default class BuildService {
         result: build[0].result,
         startTime: build[0].startTime,
         status: build[0].status,
+        url: build[0]._links.web.href,
         user: build[0].requestedFor.displayName
       });
     }

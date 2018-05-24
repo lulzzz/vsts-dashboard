@@ -1,13 +1,14 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import * as Spinner from 'react-spinkit';
-import { Card, CardSubtitle, CardTitle, Progress } from 'reactstrap';
+import { Card, CardLink, CardSubtitle, CardTitle, Progress } from 'reactstrap';
 import { BuildResult, BuildStatus } from 'vso-node-api/interfaces/BuildInterfaces';
 import './build.css';
 
 export interface IBuildProps {
   buildName: string;
   buildNumber: string;
+  buildUrl: string;
   result: number;
   status: number;
   time: Date;
@@ -45,7 +46,9 @@ export default class Build extends React.Component<IBuildProps, any> {
           <CardTitle>
             <div className="title">
               {this.showProgressIndicator()}
-              {this.props.buildName}
+              <CardLink className="header" href={this.props.buildUrl}>
+                {this.props.buildName}
+              </CardLink>
             </div>
           </CardTitle>
           {this.showProgressBar()}

@@ -2,7 +2,6 @@
  * Represents the build data from VSTS
  */
 export default class BuildData {
-
   /**
    * The build number
    */
@@ -32,6 +31,11 @@ export default class BuildData {
    * The status of the build
    */
   public status: number;
+
+  /**
+   * The link to the build details on VSTS
+   */
+  public url: string;
 
   /**
    * The user who kicked the build off
