@@ -2,7 +2,7 @@
 import * as vm from 'vso-node-api';
 import * as ba from 'vso-node-api/BuildApi';
 import * as bi from 'vso-node-api/interfaces/BuildInterfaces';
-import BuildData from './build-data';
+import { BuildData } from './build-data';
 
 export default class BuildService {
   public async getBuilds(): Promise<BuildData[]> {
@@ -27,17 +27,10 @@ export default class BuildService {
         undefined,
         1
       );
-      builds.push({
-        buildNumber: build[0].buildNumber,
-        endTime: build[0].finishTime,
-        name: build[0].definition.name,
-        result: build[0].result,
-        startTime: build[0].startTime,
-        status: build[0].status,
-        url: build[0]._links.web.href,
-        user: build[0].requestedFor.displayName
-      });
+
+      builds.push(new BuildData(build[0]));
     }
+
     return builds.sort((a, b) => (a.name.toUpperCase() <= b.name.toUpperCase() ? -1 : 1));
   }
 
