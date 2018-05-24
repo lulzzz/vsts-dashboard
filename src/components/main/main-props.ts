@@ -1,3 +1,4 @@
 export default interface IMainProps {
-  NumberOfColumns: number;
+  numberOfColumns: number;
+  refreshInterval: number;
 }

@@ -13,3 +13,11 @@
 .card-holder {
   padding: 10px;
 }
+
+.title {
+  display: flex;
+}
+
+.title .sk-spinner {
+  margin-right: 10px;
+}

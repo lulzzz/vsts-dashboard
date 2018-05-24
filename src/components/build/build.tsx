@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import * as React from 'react';
+import * as Spinner from 'react-spinkit';
 import { Card, CardSubtitle, CardTitle, Progress } from 'reactstrap';
 import { BuildResult, BuildStatus } from 'vso-node-api/interfaces/BuildInterfaces';
 import './build.css';
@@ -33,7 +34,7 @@ export default class Build extends React.Component<IBuildProps, any> {
     if (this.props.result === BuildResult.Succeeded) {
       this.buildStatus = 'success';
     } else if (this.props.status === BuildStatus.InProgress) {
-      this.buildStatus = 'warning';
+      this.buildStatus = 'info';
     } else {
       this.buildStatus = 'danger';
     }
@@ -41,7 +42,12 @@ export default class Build extends React.Component<IBuildProps, any> {
     return (
       <div className="card-holder">
         <Card className="shadow" body={true} inverse={true} color={this.buildStatus}>
-          <CardTitle>{this.props.buildName}</CardTitle>
+          <CardTitle>
+            <div className="title">
+              {this.showProgressIndicator()}
+              {this.props.buildName}
+            </div>
+          </CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
             <CardSubtitle className="subtitle">
@@ -54,10 +60,20 @@ export default class Build extends React.Component<IBuildProps, any> {
   }
 
   private showProgressBar(): any {
-    if (this.progressValue > 0) {
+    if (this.isInProgress()) {
       return <Progress className="progress" value={this.progressValue} color="info" />;
     } else {
       return <Progress className="progress" value="100" color={this.buildStatus} />;
     }
+  }
+
+  private showProgressIndicator(): any {
+    if (this.isInProgress()) {
+      return <Spinner name="circle" color="white" />;
+    }
+  }
+
+  private isInProgress(): boolean {
+    return this.props.status === BuildStatus.InProgress;
   }
 }

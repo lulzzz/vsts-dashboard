@@ -10,7 +10,7 @@ class App extends React.Component {
         <div className="header">
           <Header />
         </div>
-        <Main NumberOfColumns={2} />
+        <Main numberOfColumns={2} refreshInterval={60000} />
       </div>
     );
   }

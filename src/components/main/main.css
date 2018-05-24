@@ -1,6 +1,15 @@
 .loader {
-    display: flex;
-    height: 70vh;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.last-updated {
+  color: white;
+  font-size: 0.65em;
+  font-weight: lighter;
+  opacity: 0.25;
+  margin-bottom: 0;
+  padding-left: 30px;
 }
