@@ -2,31 +2,25 @@
 
 [![CircleCI](https://circleci.com/gh/emisgroup/vsts-dashboard.svg?style=svg)](https://circleci.com/gh/emisgroup/vsts-dashboard)
 
-A dashboard to show the status of VSTS builds
+A dashboard to show the status of Visual Studio Team Service builds
+
+## Pre-requisitives
+
+* [Node >= 4.4.7 LTS](https://nodejs.org)
+* [typescript (tsc) >= 1.8](https://www.npmjs.com/package/typescript)
+* Please note that the [CircleCI build](https://circleci.com/gh/emisgroup/vsts-dashboard) runs on Node 8.11 LTS
 
 ## Development
 
-Pre-requisites: [Node >= 4.4.7 LTS](https://nodejs.org) and [typescript (tsc) >= 1.8](https://www.npmjs.com/package/typescript)
+* Clone the repo via your preferred method
+* Set some environment variables either with `set` or `export` depending on your OS
+* Run `npm install` or `make install`
+* Run `npm start` or `make run`
+* Navigate to http://localhost:3000 to see the running dashboard
 
-Run `npm install` first
 
-Set environment variables using set or export:
+## Environment Variables Required
 
-```bash
-// use your URL
-VSTS_URL=https://fabrikam.visualstudio.com/defaultcollection
-
-// use your token
-VSTS_TOKEN={TOKEN}
-
-// use your project
-VSTS_PROJECT=myProject
-```
-
-Run:
-
-```bash
-npm start
-```
-
-Navigate to http://localhost:3000 to see the running dashboard
+* VSTS_URL=https://fabrikam.visualstudio.com/defaultcollection
+* VSTS_TOKEN={TOKEN}
+* VSTS_PROJECT={Project}
