@@ -31,8 +31,7 @@ export class Build extends React.Component<IBuildProps> {
   /**
    * Render the component
    */
-  public render() {
-
+  public render(): React.ReactNode {
     if (this.props.build.isRunning()) {
       this.buildStatus = "info"
       this.timeMarker = "Running"
