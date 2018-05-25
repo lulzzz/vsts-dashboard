@@ -30,6 +30,8 @@ jobs:
       - run: make vet
       - run: make build
       - run: make test-cov
+      - run: bash <(curl -s https://codecov.io/bash)
+
 
       - save_cache:
           paths:
