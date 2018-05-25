@@ -2,16 +2,11 @@ import * as moment from 'moment';
 import * as React from 'react';
 import * as Spinner from 'react-spinkit';
 import { Card, CardLink, CardSubtitle, CardTitle, Progress } from 'reactstrap';
-import { BuildResult, BuildStatus } from 'vso-node-api/interfaces/BuildInterfaces';
+import { BuildData } from '../../services/build-data';
 import './build.css';
 
 export interface IBuildProps {
-  buildName: string;
-  buildNumber: string;
-  buildUrl: string;
-  result: number;
-  status: number;
-  time: Date;
+  build: BuildData;
 }
 
 /**
@@ -29,15 +24,28 @@ export default class Build extends React.Component<IBuildProps, any> {
   private progressValue: number = 0;
 
   /**
+   * A string that represents build times or status of the build
+   */
+  private timeMarker: string;
+
+  /**
    * Render the component
    */
   public render() {
-    if (this.props.result === BuildResult.Succeeded) {
-      this.buildStatus = 'success';
-    } else if (this.props.status === BuildStatus.InProgress) {
-      this.buildStatus = 'info';
+
+    if (this.props.build.isRunning()) {
+      this.buildStatus = "info"
+      this.timeMarker = "Running"
+    } else if (this.props.build.isQueued()) {
+      this.buildStatus = "info"
+      this.timeMarker = "Queued"
     } else {
-      this.buildStatus = 'danger';
+      if (this.props.build.wasSuccessful() !== true) {
+        this.buildStatus = 'danger'
+      } else {
+        this.buildStatus = 'success'
+      }
+      this.timeMarker = moment(this.props.build.endTime).fromNow();
     }
 
     return (
@@ -46,15 +54,15 @@ export default class Build extends React.Component<IBuildProps, any> {
           <CardTitle>
             <div className="title">
               {this.showProgressIndicator()}
-              <CardLink className="header" href={this.props.buildUrl}>
-                {this.props.buildName}
+              <CardLink className="header" href={this.props.build.url}>
+                {this.props.build.name}
               </CardLink>
             </div>
           </CardTitle>
           {this.showProgressBar()}
           <div className="info-bar">
             <CardSubtitle className="subtitle">
-              #{this.props.buildNumber} - {this.props.time ? moment(this.props.time).fromNow() : 'Running'}
+              #{this.props.build.buildNumber} - {this.timeMarker}
             </CardSubtitle>
           </div>
         </Card>
@@ -63,7 +71,7 @@ export default class Build extends React.Component<IBuildProps, any> {
   }
 
   private showProgressBar(): any {
-    if (this.isInProgress()) {
+    if (this.props.build.isRunning() || this.props.build.isQueued()) {
       return <Progress className="progress" value={this.progressValue} color="info" />;
     } else {
       return <Progress className="progress" value="100" color={this.buildStatus} />;
@@ -71,12 +79,8 @@ export default class Build extends React.Component<IBuildProps, any> {
   }
 
   private showProgressIndicator(): any {
-    if (this.isInProgress()) {
+    if (this.props.build.isRunning()) {
       return <Spinner name="circle" color="white" />;
     }
-  }
-
-  private isInProgress(): boolean {
-    return this.props.status === BuildStatus.InProgress;
   }
 }

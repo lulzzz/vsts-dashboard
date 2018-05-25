@@ -19,6 +19,7 @@ explain:
 .PHONY: clean
 clean:
 	rm -fr node_modules
+	rm -fr build/
 
 .PHONY: install
 install:
@@ -38,6 +39,7 @@ test:
 
 .PHONY: test-cov
 test-cov:
+	CI=true node scripts/test.js --env=jsdom --coverage --coverageDirectory=build/coverage
 
 .PHONY: run
 run:
