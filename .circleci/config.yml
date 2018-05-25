@@ -26,7 +26,10 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: make install vet build test
+      - run: make install
+      - run: make vet
+      - run: make build
+      - run: make test-cov
 
       - save_cache:
           paths:
