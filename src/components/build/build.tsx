@@ -62,6 +62,7 @@ export class Build extends React.Component<IBuildProps> {
           <div className="info-bar">
             <CardSubtitle className="subtitle">
               #{this.props.build.buildNumber} - {this.timeMarker}
+              <div className="branch">{this.props.build.branch}</div>
             </CardSubtitle>
           </div>
         </Card>
