@@ -2,40 +2,51 @@ import * as moment from 'moment';
 import * as React from 'react';
 import * as Spinner from 'react-spinkit';
 import { Col, Container, Row } from 'reactstrap';
-import BuildService from '../../services/build-service';
-import Build from '../build/build';
-import IMainProps from './main-props';
-import IMainState from './main-state';
+import { BuildData } from '../../services/build-data';
+import { BuildService } from '../../services/build-service';
+import { Build } from '../build/build';
+import { IMainProps } from './main-props';
+import { IMainState } from './main-state';
 import './main.css';
 
-export default class Main extends React.Component<IMainProps, IMainState> {
+/**
+ * The container that holds all the build components
+ */
+export class Main extends React.Component<IMainProps, IMainState> {
+  /**
+   * The timer to keep track of when to refresh
+   */
   private timer: NodeJS.Timer;
 
-  public componentWillMount() {
+  public componentDidMount(): void {
+    this.timer = setInterval(() => this.getBuildData(), this.props.refreshInterval);
+  }
+
+  public componentWillMount(): void {
     this.setState({ loading: true });
     this.getBuildData();
   }
 
-  public componentDidMount() {
-    this.timer = setInterval(() => this.getBuildData(), this.props.refreshInterval);
-  }
-
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     clearInterval(this.timer);
   }
 
-  public render() {
-    const numCols = this.props.numberOfColumns;
-    const builds =
+  /**
+   * Render the component
+   */
+  public render(): React.ReactNode {
+    const numCols: number = this.props.numberOfColumns;
+    const builds: React.ReactNode[] =
       this.state && this.state.builds
         ? this.state.builds.map(b => <Build key={b.name} build={b} />)
         : [];
 
-    const cols = [];
-    for (let j = 0; j < numCols; j++) {
+    const cols: React.ReactNode[] = [];
+    const maxColumns: number = 12;
+    for (let j: number = 0; j < numCols; j++) {
       cols.push(
-        <Col key={j} lg={12 / numCols}>
-          {builds.filter((v, i) => i % numCols === j)}
+        <Col key={j} lg={maxColumns / numCols}>
+          {builds.filter((v: BuildData, i: number) => i % numCols === j)}
         </Col>
       );
     }
@@ -58,8 +69,11 @@ export default class Main extends React.Component<IMainProps, IMainState> {
     }
   }
 
-  private getBuildData() {
-    return new BuildService().getBuilds().then(b => {
+  /**
+   * Get the build data from VSTS
+   */
+  private getBuildData(): void {
+    new BuildService().getBuilds().then((b: BuildData[]) => {
       this.setState({ builds: b, loading: false, lastUpdated: new Date(moment.now()) });
     });
   }

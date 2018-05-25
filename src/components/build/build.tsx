@@ -12,7 +12,7 @@ export interface IBuildProps {
 /**
  * This is responsible for rendering a build
  */
-export default class Build extends React.Component<IBuildProps, any> {
+export class Build extends React.Component<IBuildProps> {
   /**
    * Ultimately will represent what colour to render the build
    */
@@ -21,7 +21,7 @@ export default class Build extends React.Component<IBuildProps, any> {
   /**
    * How far has the build progressed whilst running
    */
-  private progressValue: number = 0;
+  private readonly progressValue: number = 0;
 
   /**
    * A string that represents build times or status of the build

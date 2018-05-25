@@ -1,7 +1,7 @@
 import { BuildData } from '../../services/build-data';
 
-export default interface IMainState {
+export interface IMainState {
   builds: BuildData[];
-  loading: boolean;
   lastUpdated: Date;
+  loading: boolean;
 }

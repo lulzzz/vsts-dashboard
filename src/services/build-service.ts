@@ -1,18 +1,22 @@
 // @ts-ignore
-import * as vm from 'vso-node-api';
-import * as ba from 'vso-node-api/BuildApi';
-import * as bi from 'vso-node-api/interfaces/BuildInterfaces';
+import { Build, BuildDefinitionReference, getPersonalAccessTokenHandler, IBuildApi, WebApi } from 'vso-node-api';
 import { BuildData } from './build-data';
 
-export default class BuildService {
+/**
+ * Responsible for wrapping the VSTS Web calls
+ */
+export class BuildService {
+  /**
+   * Get the builds from VSTS
+   */
   public async getBuilds(): Promise<BuildData[]> {
     const builds: BuildData[] = [];
-    const vsts: vm.WebApi = await this.getApi();
-    const vstsBuild: ba.IBuildApi = await vsts.getBuildApi();
-    const project = process.env.VSTS_PROJECT;
-    const defs: bi.BuildDefinitionReference[] = await vstsBuild.getDefinitions(project);
+    const vsts: WebApi = await this.getApi();
+    const vstsBuild: IBuildApi = await vsts.getBuildApi();
+    const project: string | undefined = process.env.VSTS_PROJECT;
+    const defs: BuildDefinitionReference[] = await vstsBuild.getDefinitions(project);
     for (const d of defs) {
-      const build: bi.Build[] = await vstsBuild.getBuilds(
+      const build: Build[] = await vstsBuild.getBuilds(
         project,
         [d.id],
         undefined,
@@ -31,18 +35,21 @@ export default class BuildService {
       builds.push(new BuildData(build[0]));
     }
 
-    return builds.sort((a, b) => (a.name.toUpperCase() <= b.name.toUpperCase() ? -1 : 1));
+    return builds.sort((a: BuildData, b: BuildData) => (a.name.toUpperCase() <= b.name.toUpperCase() ? -1 : 1));
   }
 
-  private async getApi(): Promise<vm.WebApi> {
-    return new Promise<vm.WebApi>(async (resolve, reject) => {
+  /**
+   * Wrapper to get the API, based on some environment variables we have
+   */
+  private async getApi(): Promise<WebApi> {
+    return new Promise<WebApi>(async (resolve, reject) => {
       try {
-        const serverUrl = process.env.VSTS_URL;
-        const token = process.env.VSTS_TOKEN;
-        const authHandler = vm.getPersonalAccessTokenHandler(token);
+        const serverUrl: string = process.env.VSTS_URL as string;
+        const token: string = process.env.VSTS_TOKEN as string;
+        const authHandler = getPersonalAccessTokenHandler(token);
         const option = undefined;
 
-        const vsts: vm.WebApi = new vm.WebApi(serverUrl, authHandler, option);
+        const vsts: WebApi = new WebApi(serverUrl, authHandler, option);
         await vsts.connect();
 
         resolve(vsts);
