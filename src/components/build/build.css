@@ -27,13 +27,13 @@
   float: right;
 }
 
-.header {
+.build-header {
   color: white;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
   font-size: 1.25em;
 }
 
-.header:hover {
+.build-header:hover {
   color: white;
   text-decoration: underline;
 }

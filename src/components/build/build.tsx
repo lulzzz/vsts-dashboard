@@ -33,16 +33,16 @@ export class Build extends React.Component<IBuildProps> {
    */
   public render(): React.ReactNode {
     if (this.props.build.isRunning()) {
-      this.buildStatus = "info"
-      this.timeMarker = "Running"
+      this.buildStatus = 'info';
+      this.timeMarker = 'Running';
     } else if (this.props.build.isQueued()) {
-      this.buildStatus = "info"
-      this.timeMarker = "Queued"
+      this.buildStatus = 'info';
+      this.timeMarker = 'Queued';
     } else {
       if (this.props.build.wasSuccessful() !== true) {
-        this.buildStatus = 'danger'
+        this.buildStatus = 'danger';
       } else {
-        this.buildStatus = 'success'
+        this.buildStatus = 'success';
       }
       this.timeMarker = moment(this.props.build.endTime).fromNow();
     }
@@ -53,7 +53,7 @@ export class Build extends React.Component<IBuildProps> {
           <CardTitle>
             <div className="title">
               {this.showProgressIndicator()}
-              <CardLink className="header" href={this.props.build.url}>
+              <CardLink className="build-header" href={this.props.build.url}>
                 {this.props.build.name}
               </CardLink>
             </div>
