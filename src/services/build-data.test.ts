@@ -3,6 +3,7 @@ import { BuildData } from './build-data';
 
 test('the constructor sets up the internals', () => {
     const build = new BuildData({
+        sourceBranch: "refs/heads/master",
         buildNumber: 76,
         definition: {name: "build-definition-name"},
         finishTime: "2018-05-24T19:44:57.0400704Z",
@@ -12,6 +13,7 @@ test('the constructor sets up the internals', () => {
         status: "completed",
         url: "https://fabrikam.visualstudio.com/7120302e-1787-4c3a-a75c-6cbe603c5dc8/_apis/build/Builds/76",
     });
+    expect(build.branch).toBe("refs/heads/master");
     expect(build.buildNumber).toBe(76);
     expect(build.endTime).toBe("2018-05-24T19:44:57.0400704Z");
     expect(build.name).toBe("build-definition-name");

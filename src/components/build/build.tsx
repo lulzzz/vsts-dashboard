@@ -31,8 +31,7 @@ export class Build extends React.Component<IBuildProps> {
   /**
    * Render the component
    */
-  public render() {
-
+  public render(): React.ReactNode {
     if (this.props.build.isRunning()) {
       this.buildStatus = "info"
       this.timeMarker = "Running"
@@ -63,6 +62,7 @@ export class Build extends React.Component<IBuildProps> {
           <div className="info-bar">
             <CardSubtitle className="subtitle">
               #{this.props.build.buildNumber} - {this.timeMarker}
+              <div className="branch">{this.props.build.branch}</div>
             </CardSubtitle>
           </div>
         </Card>

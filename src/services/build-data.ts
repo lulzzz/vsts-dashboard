@@ -5,6 +5,11 @@ import { Build, BuildResult, BuildStatus } from 'vso-node-api/interfaces/BuildIn
  */
 export class BuildData {
   /**
+   * The branch of the build
+   */
+  public branch: string;
+
+  /**
    * The build number
    */
   public buildNumber: string;
@@ -51,6 +56,7 @@ export class BuildData {
    * and so we can add utility functions that helps build the UI
    */
   public constructor(build: Build) {
+    this.branch = build.sourceBranch;
     this.buildNumber = build.buildNumber;
     this.endTime = build.finishTime;
     this.name = build.definition.name;

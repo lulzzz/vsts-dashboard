@@ -5,9 +5,13 @@ import { Col, Container, Row } from 'reactstrap';
 import { BuildData } from '../../services/build-data';
 import { BuildService } from '../../services/build-service';
 import { Build } from '../build/build';
-import { IMainProps } from './main-props';
 import { IMainState } from './main-state';
 import './main.css';
+
+export interface IMainProps {
+  numberOfColumns: number;
+  refreshInterval: number;
+}
 
 /**
  * The container that holds all the build components
