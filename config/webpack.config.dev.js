@@ -215,12 +215,6 @@ module.exports = {
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
     new InterpolateHtmlPlugin(env.raw),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
-      VSTS_URL: 'https://fabrikam.visualstudio.com/',
-      VSTS_TOKEN: 'token ',
-      VSTS_PROJECT: 'Fabrikam-Fiber'
-    }),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
