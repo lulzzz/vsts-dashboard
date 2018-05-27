@@ -36,7 +36,7 @@ export class Config extends React.Component<IConfigData, IConfigData> {
           <Input placeholder="account-name" onChange={this.setAccountName} defaultValue={this.state ? this.state.accountName : ''} />
           <InputGroupAddon addonType="append">.visualstudio.com</InputGroupAddon>
         </InputGroup>
-        <Input placeholder="auth-token" onChange={this.setToken} defaultValue={this.state ? this.state.token : ''} />
+        <Input type="password" placeholder="auth-token" onChange={this.setToken} defaultValue={this.state ? this.state.token : ''} />
         <Input placeholder="project-name" onChange={this.setProject} defaultValue={this.state ? this.state.project : ''} />
         <Button color="primary" block={true} onClick={this.saveConfig}>
           Save
