@@ -12,6 +12,7 @@ import './main.css';
 export interface IMainProps {
   numberOfColumns: number;
   refreshInterval: number;
+  configService: ConfigService;
 }
 
 /**
@@ -21,7 +22,7 @@ export class Main extends React.Component<IMainProps, IMainState> {
   /**
    * The configuration service to retrieve the details of the VSTS API
    */
-  private readonly configService: ConfigService = new ConfigService();
+  private configService: ConfigService;
 
   /**
    * The timer to keep track of when to refresh
@@ -33,6 +34,7 @@ export class Main extends React.Component<IMainProps, IMainState> {
   }
 
   public componentWillMount(): void {
+    this.configService = this.props.configService;
     this.setState({ loading: true });
     this.getBuildData();
   }
