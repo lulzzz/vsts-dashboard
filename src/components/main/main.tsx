@@ -4,6 +4,7 @@ import * as Spinner from 'react-spinkit';
 import { Col, Container, Row } from 'reactstrap';
 import { BuildData } from '../../services/build-data';
 import { BuildService } from '../../services/build-service';
+import { ConfigService } from '../../services/config-service';
 import { Build } from '../build/build';
 import { IMainState } from './main-state';
 import './main.css';
@@ -21,6 +22,7 @@ export class Main extends React.Component<IMainProps, IMainState> {
    * The timer to keep track of when to refresh
    */
   private timer: NodeJS.Timer;
+  private readonly configService: ConfigService = new ConfigService();
 
   public componentDidMount(): void {
     this.timer = setInterval(() => this.getBuildData(), this.props.refreshInterval);
@@ -40,10 +42,7 @@ export class Main extends React.Component<IMainProps, IMainState> {
    */
   public render(): React.ReactNode {
     const numCols: number = this.props.numberOfColumns;
-    const builds: React.ReactNode[] =
-      this.state && this.state.builds
-        ? this.state.builds.map(b => <Build key={b.name} build={b} />)
-        : [];
+    const builds: React.ReactNode[] = this.state && this.state.builds ? this.state.builds.map(b => <Build key={b.name} build={b} />) : [];
 
     const cols: React.ReactNode[] = [];
     const maxColumns: number = 12;
@@ -77,7 +76,7 @@ export class Main extends React.Component<IMainProps, IMainState> {
    * Get the build data from VSTS
    */
   private getBuildData(): void {
-    new BuildService().getBuilds().then((b: BuildData[]) => {
+    new BuildService(this.configService).getBuilds().then((b: BuildData[]) => {
       this.setState({ builds: b, loading: false, lastUpdated: new Date(moment.now()) });
     });
   }
