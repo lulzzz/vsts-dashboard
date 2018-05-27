@@ -63,7 +63,7 @@ export class BuildData {
     this.result = build.result;
     this.startTime = build.startTime;
     this.status = build.status;
-    this.url = build.url;
+    this.url = build._links.web.href;
     this.user = build.requestedFor.displayName;
   }
 
