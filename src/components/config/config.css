@@ -1,0 +1,12 @@
+.input-container {
+  width: 50vw;
+}
+
+p {
+  color: white;
+}
+
+.form-control,
+.input-group {
+  margin-bottom: 30px;
+}
