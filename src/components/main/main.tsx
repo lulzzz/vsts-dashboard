@@ -19,10 +19,14 @@ export interface IMainProps {
  */
 export class Main extends React.Component<IMainProps, IMainState> {
   /**
+   * The configuration service to retrieve the details of the VSTS API
+   */
+  private readonly configService: ConfigService = new ConfigService();
+
+  /**
    * The timer to keep track of when to refresh
    */
   private timer: NodeJS.Timer;
-  private readonly configService: ConfigService = new ConfigService();
 
   public componentDidMount(): void {
     this.timer = setInterval(() => this.getBuildData(), this.props.refreshInterval);
