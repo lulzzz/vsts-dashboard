@@ -10,6 +10,12 @@ import { ConfigService } from './services/config-service';
  */
 export class App extends React.Component {
   /**
+   * Configuration service to determine whether
+   * the site is configured
+   */
+  private readonly configService: ConfigService = new ConfigService();
+
+  /**
    * What is the default number of columns for the application
    */
   private readonly numberOfColumns: number = 2;
@@ -18,12 +24,6 @@ export class App extends React.Component {
    * How many ms to wait before refreshing the data
    */
   private readonly refreshInterval: number = 60000;
-
-  /**
-   * Configuration service to determine whether
-   * the site is configured
-   */
-  private readonly configService: ConfigService = new ConfigService();
 
   /**
    * Render the application

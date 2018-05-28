@@ -1,7 +1,7 @@
 export class ConfigService {
+  private readonly projectKey: string = 'VSTS_PROJECT';
   private readonly tokenKey: string = 'VSTS_TOKEN';
   private readonly urlKey: string = 'VSTS_URL';
-  private readonly projectKey: string = 'VSTS_PROJECT';
 
   /**
    * Gets the authentication token for VSTS

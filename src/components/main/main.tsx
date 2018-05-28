@@ -10,9 +10,9 @@ import { IMainState } from './main-state';
 import './main.css';
 
 export interface IMainProps {
+  configService: ConfigService;
   numberOfColumns: number;
   refreshInterval: number;
-  configService: ConfigService;
 }
 
 /**

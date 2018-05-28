@@ -8,9 +8,16 @@ import { ConfigService } from './config-service';
  */
 export class BuildService {
   /**
+   * The configuration service
+   */
+  private configService: ConfigService;
+
+  /**
    * Constructor for the build service
    */
-  constructor(private configService: ConfigService) {}
+  public constructor(configService: ConfigService) {
+    this.configService = configService;
+  }
 
   /**
    * Get the builds from VSTS

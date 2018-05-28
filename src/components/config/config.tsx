@@ -5,15 +5,15 @@ import './config.css';
 
 interface IConfigData {
   accountName: string;
-  token: string;
   project: string;
+  token: string;
 }
 
 /**
  * Configures the settings for the dashboard
  */
 export class Config extends React.Component<IConfigData, IConfigData> {
-  constructor(props: IConfigData) {
+  public constructor(props: IConfigData) {
     super(props);
     this.setAccountName = this.setAccountName.bind(this);
     this.setProject = this.setProject.bind(this);
@@ -45,23 +45,23 @@ export class Config extends React.Component<IConfigData, IConfigData> {
     );
   }
 
-  private setAccountName(event: any): void {
-    this.setState({ accountName: `https://${event.target.value}.visualstudio.com` });
+  private saveConfig(): void {
+    const configService: ConfigService = new ConfigService();
+    configService.AccountURL = this.state.accountName;
+    configService.ProjectName = this.state.project;
+    configService.Token = this.state.token;
+    location.reload();
   }
 
-  private setToken(event: any): void {
-    this.setState({ token: event.target.value });
+  private setAccountName(event: any): void {
+    this.setState({ accountName: `https://${event.target.value}.visualstudio.com` });
   }
 
   private setProject(event: any): void {
     this.setState({ project: event.target.value });
   }
 
-  private saveConfig(): void {
-    const configService = new ConfigService();
-    configService.AccountURL = this.state.accountName;
-    configService.ProjectName = this.state.project;
-    configService.Token = this.state.token;
-    location.reload();
+  private setToken(event: any): void {
+    this.setState({ token: event.target.value });
   }
 }

@@ -11,24 +11,24 @@ it('renders without crashing', () => {
 class LocalStorageMock {
   private store: any;
 
-  constructor() {
+  public constructor() {
     this.store = {};
   }
 
-  public clear() {
+  public clear(): void {
     this.store = {};
   }
 
-  public getItem(key: string) {
-    return this.store[key] || null;
+  public getItem(key: string): string {
+    return this.store[key] || undefined;
   }
 
-  public setItem(key: string, value: string) {
-    this.store[key] = value.toString();
-  }
-
-  public removeItem(key: string) {
+  public removeItem(key: string): void {
     delete this.store[key];
+  }
+
+  public setItem(key: string, value: string): void {
+    this.store[key] = value.toString();
   }
 }
 
