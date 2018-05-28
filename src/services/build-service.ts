@@ -57,7 +57,7 @@ export class BuildService {
   private async getApi(): Promise<WebApi> {
     return new Promise<WebApi>(async (resolve, reject) => {
       try {
-        const serverUrl: string = this.configService.AccountURL;
+        const serverUrl: string = `https://${this.configService.AccountURL}.visualstudio.com`;
         const token: string = this.configService.Token;
         const authHandler = getPersonalAccessTokenHandler(token);
         const option = undefined;

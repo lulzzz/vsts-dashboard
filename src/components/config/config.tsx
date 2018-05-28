@@ -22,7 +22,11 @@ export class Config extends React.Component<IConfigData, IConfigData> {
   }
 
   public componentDidMount(): void {
-    this.setState(this.props);
+    this.setState({
+      accountName: this.props.accountName,
+      project: this.props.project,
+      token: this.props.token
+    });
   }
 
   /**
@@ -33,11 +37,12 @@ export class Config extends React.Component<IConfigData, IConfigData> {
       <Container className="input-container">
         <p>Configure your dashboard here:</p>
         <InputGroup>
-          <Input placeholder="account-name" onChange={this.setAccountName} defaultValue={this.state ? this.state.accountName : ''} />
+          <InputGroupAddon addonType="prepend">https://</InputGroupAddon>
+          <Input placeholder="account-name" onChange={this.setAccountName} defaultValue={this.props.accountName} />
           <InputGroupAddon addonType="append">.visualstudio.com</InputGroupAddon>
         </InputGroup>
-        <Input type="password" placeholder="auth-token" onChange={this.setToken} defaultValue={this.state ? this.state.token : ''} />
-        <Input placeholder="project-name" onChange={this.setProject} defaultValue={this.state ? this.state.project : ''} />
+        <Input type="password" placeholder="auth-token" onChange={this.setToken} defaultValue={this.props.token} />
+        <Input placeholder="project-name" onChange={this.setProject} defaultValue={this.props.project} />
         <Button color="primary" block={true} onClick={this.saveConfig}>
           Save
         </Button>
@@ -54,7 +59,7 @@ export class Config extends React.Component<IConfigData, IConfigData> {
   }
 
   private setAccountName(event: any): void {
-    this.setState({ accountName: `https://${event.target.value}.visualstudio.com` });
+    this.setState({ accountName: event.target.value });
   }
 
   private setProject(event: any): void {
