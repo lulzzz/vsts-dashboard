@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from './App';
+import './mocks/local-storage';
 
 it('renders without crashing', () => {
   const div: HTMLDivElement = document.createElement('div');
@@ -8,29 +9,11 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-class LocalStorageMock {
-  private store: any;
-
-  public constructor() {
-    this.store = {};
-  }
-
-  public clear(): void {
-    this.store = {};
-  }
-
-  public getItem(key: string): string {
-    return this.store[key] || undefined;
-  }
-
-  public removeItem(key: string): void {
-    delete this.store[key];
-  }
-
-  public setItem(key: string, value: string): void {
-    this.store[key] = value.toString();
-  }
-}
-
-// @ts-ignore
-global.localStorage = new LocalStorageMock();
+it('renders without crashing when config is set', () => {
+  const div: HTMLDivElement = document.createElement('div');
+  localStorage.setItem('VSTS_PROJECT', 'Project');
+  localStorage.setItem('VSTS_TOKEN', 'TOKEN');
+  localStorage.setItem('VSTS_URL', 'https://fabrikam.visualstudio.com/defaultcollection');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
