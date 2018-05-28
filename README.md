@@ -13,7 +13,22 @@ A dashboard to show the status of Visual Studio Team Service builds
 ## Development
 
 * Clone the repo via your preferred method
-* Set some environment variables either with `set` or `export` depending on your OS
 * Run `npm install` or `make install`
 * Run `npm start` or `make run`
 * Navigate to http://localhost:3000 to see the running dashboard
+
+## Docker
+
+* In your cloned repo, run the following command:
+
+```bash
+docker build --rm -f Dockerfile -t vsts-dashboard:latest .
+```
+
+* When the image is built, run the container with:
+
+```bash
+docker run -d --name vsts-dashboard -p 8080:80 vsts-dashboard
+```
+
+* Then navigate to http:localhost:8080 and configure the dashboard with your Visual Studio Team Services details
