@@ -43,11 +43,15 @@ export class Config extends React.Component<IConfigData, IConfigData> {
         </InputGroup>
         <Input type="password" placeholder="auth-token" onChange={this.setToken} defaultValue={this.props.token} />
         <Input placeholder="project-name" onChange={this.setProject} defaultValue={this.props.project} />
-        <Button color="primary" block={true} onClick={this.saveConfig}>
+        <Button color="primary" block={true} onClick={this.saveConfig} disabled={this.isValid()}>
           Save
         </Button>
       </Container>
     );
+  }
+
+  private isValid(): boolean {
+    return !this.state || !(this.state.accountName !== '' && this.state.project !== '' && this.state.token !== '');
   }
 
   private saveConfig(): void {
