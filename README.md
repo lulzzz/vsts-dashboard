@@ -17,10 +17,3 @@ A dashboard to show the status of Visual Studio Team Service builds
 * Run `npm install` or `make install`
 * Run `npm start` or `make run`
 * Navigate to http://localhost:3000 to see the running dashboard
-
-
-## Environment Variables Required
-
-* VSTS_URL=https://fabrikam.visualstudio.com/defaultcollection
-* VSTS_TOKEN={TOKEN}
-* VSTS_PROJECT={Project}
