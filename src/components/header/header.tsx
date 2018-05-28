@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, Navbar, NavbarBrand } from 'reactstrap';
+import { ConfigService } from '../../services/config-service';
 import './header.css';
 
 /**
@@ -26,7 +27,7 @@ export class Header extends React.Component {
   }
 
   private configure(): void {
-    localStorage.clear();
+    new ConfigService().ProjectName = '';
     location.reload();
   }
 }
