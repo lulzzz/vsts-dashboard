@@ -22,7 +22,13 @@ A dashboard to show the status of Visual Studio Team Service builds
 * In your cloned repo, run the following command:
 
 ```bash
-docker build --rm -f Dockerfile -t vsts-dashboard:latest .
+docker build -t vsts-dashboard:latest .
+```
+
+or
+
+```bash
+make docker-build
 ```
 
 * When the image is built, run the container with:
