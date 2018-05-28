@@ -1,5 +1,6 @@
-import { ConfigService } from './config-service';
+// tslint:disable-next-line:no-import-side-effect
 import '../mocks/local-storage';
+import { ConfigService } from './config-service';
 
 test('that storing the project is successful', () => {
   const configService: ConfigService = new ConfigService();
