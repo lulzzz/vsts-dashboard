@@ -40,7 +40,7 @@ export class App extends React.Component {
   }
 
   private showPage(): React.ReactNode {
-    if (!this.configService.AccountURL) {
+    if (!this.configService.AccountURL || !this.configService.ProjectName || !this.configService.Token) {
       return <Config accountName={this.configService.AccountURL} project={this.configService.ProjectName} token={this.configService.Token} />;
     } else {
       return <Main configService={this.configService} numberOfColumns={this.numberOfColumns} refreshInterval={this.refreshInterval} />;
